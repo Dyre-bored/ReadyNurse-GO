@@ -1171,6 +1171,13 @@
                 nextBtn.click();
             }
         });
+        function playGame(game) {
+  if (game === 'vital-signs') {
+    startQuiz(vitalSignQuestions.beginner);
+  } else {
+    alert("Game not ready yet: " + game);
+  }
+}
     </script>
 </body>
 </html>
