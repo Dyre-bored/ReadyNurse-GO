@@ -1,59 +1,7 @@
-/* Header container */
-.header {
-    position: relative;
-    height: 250px; /* Adjust as needed */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-/* Header content (logo & text) */
-.header-content {
-    position: relative;
-    z-index: 1; /* Ensures content stays above background */
-}
-
-/* Animated gradient background */
-.header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(270deg, #FFD700, #1E90FF, #FFD700, #1E90FF);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-    z-index: 0;
-}
-
-/* Moving abstract shapes overlay */
-.header::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="50" cy="50" r="50" fill="%23ffffff" fill-opacity="0.05"/></svg>');
-    background-repeat: repeat;
-    animation: shapesMove 30s linear infinite;
-    z-index: 0;
-}
-
-/* Gradient animation */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Shapes animation */
-@keyframes shapesMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 200px 200px; }
-}
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64">
+  <!-- Rounded shield base -->
+  <path d="M32 2 L58 16 V48 C58 54 52 60 46 60 H18 C12 60 6 54 6 48 V16 Z" fill="#00BFFF" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Medical cross inside shield -->
+  <rect x="28" y="20" width="8" height="24" fill="white"/>
+  <rect x="20" y="28" width="24" height="8" fill="white"/>
+</svg>
