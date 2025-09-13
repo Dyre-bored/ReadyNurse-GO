@@ -673,13 +673,26 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+</style>
 </head>
 <body>
     <header class="header">
-        <div class="header-content">
-            <div class="logo">ReadyNurse</div>
-            <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+        <div class="header-content" style="display:flex; align-items:center; justify-content:space-between; padding:1rem;">
+            <!-- Logo and Site Name -->
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <img src="logo.svg" alt="ReadyNurse Logo" style="height:48px; width:48px;">
+                <div class="logo" style="font-size:1.8rem; font-weight:bold; 
+                    background: linear-gradient(90deg, #6a11cb, #2575fc); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent;">
+                    ReadyNurse
+                </div>
+            </div>
+
+            <!-- Tagline -->
+            <div class="tagline" style="font-size:1rem; color:#555;">
+                RN Gaming Hub - Learn, Play, Excel
+            </div>
         </div>
     </header>
 
