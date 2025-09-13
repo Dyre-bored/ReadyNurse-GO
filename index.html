@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReadyNurse - RN Gaming Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2D3748;
+            --primary-light: #4A5568;
+            --secondary: #38A169;
+            --secondary-light: #48BB78;
+            --accent: #ED8936;
+            --accent-light: #F6AD55;
+            --surface: #F7FAFC;
+            --surface-elevated: #FFFFFF;
+            --surface-accent: #EDF2F7;
+            --text-primary: #1A202C;
+            --text-secondary: #4A5568;
+            --text-muted: #718096;
+            --border: #E2E8F0;
+            --border-focus: #CBD5E0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,196 +36,376 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd0 100%);
-            color: #4a4a4a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--surface);
+            color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
         }
 
         .header {
-            background: linear-gradient(135deg, #6b8eb5 0%, #4a6fa5 100%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,100 1000,100 1000,20 0,80"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 2.8rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo::before {
+            content: "🏥";
+            margin-right: 0.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .tagline {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 400;
+            letter-spacing: 0.01em;
         }
 
         .main-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
         .welcome-section {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(255,255,255,0.8);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: var(--surface-elevated);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
 
         .welcome-section h1 {
-            color: #4a6fa5;
-            margin-bottom: 1rem;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .progress-card {
+            background: var(--surface-elevated);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--shadow-lg);
+        }
+
+        .progress-icon {
             font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient-success);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .game-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            background: var(--surface-elevated);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px var(--shadow-lg);
+            border-color: var(--border-focus);
+        }
+
+        .game-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .game-card * {
+            position: relative;
+            z-index: 1;
         }
 
         .game-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px var(--shadow));
         }
 
         .game-title {
-            color: #4a6fa5;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
         }
 
         .game-description {
-            color: #666;
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .game-progress {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--surface-accent);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .play-button {
-            background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+            background: var(--gradient-secondary);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: bold;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: transform 0.2s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(245, 87, 108, 0.3);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.01em;
         }
 
         .play-button:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.4);
+        }
+
+        .play-button:active {
+            transform: scale(0.98);
         }
 
         .coming-soon {
-            opacity: 0.6;
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .coming-soon .play-button {
-            background: #bbb;
+            background: var(--text-muted);
             cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .coming-soon .play-button:hover {
+            transform: none;
+            box-shadow: none;
         }
 
         /* Game Interface */
         .game-interface {
             display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: var(--surface-elevated);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 12px 48px var(--shadow-lg);
+            border: 1px solid var(--border);
             text-align: center;
+            position: relative;
         }
 
         .back-button {
-            background: #6c757d;
+            background: var(--text-muted);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            border-radius: 12px;
             cursor: pointer;
             margin-bottom: 2rem;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .back-button:hover {
+            background: var(--primary-light);
         }
 
         .difficulty-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin: 3rem 0;
             flex-wrap: wrap;
         }
 
         .difficulty-btn {
-            padding: 1rem 2rem;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            background: white;
+            padding: 1.5rem 2.5rem;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: var(--surface-elevated);
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 16px var(--shadow);
         }
 
         .difficulty-btn.beginner {
-            border-color: #81c784;
-            color: #4caf50;
+            border-color: var(--secondary);
+            color: var(--secondary);
         }
 
         .difficulty-btn.intermediate {
-            border-color: #ffb74d;
-            color: #ff9800;
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .difficulty-btn.expert {
-            border-color: #e57373;
-            color: #f44336;
+            border-color: #E53E3E;
+            color: #E53E3E;
         }
 
         .difficulty-btn.selected {
-            transform: scale(1.1);
+            transform: scale(1.08);
+            box-shadow: 0 8px 32px var(--shadow-lg);
         }
 
         .difficulty-btn.beginner.selected {
-            background: #4caf50;
+            background: var(--secondary);
             color: white;
+            box-shadow: 0 8px 32px rgba(56, 161, 105, 0.3);
         }
 
         .difficulty-btn.intermediate.selected {
-            background: #ff9800;
+            background: var(--accent);
             color: white;
+            box-shadow: 0 8px 32px rgba(237, 137, 54, 0.3);
         }
 
         .difficulty-btn.expert.selected {
-            background: #f44336;
+            background: #E53E3E;
             color: white;
+            box-shadow: 0 8px 32px rgba(229, 62, 62, 0.3);
         }
 
         .game-stats {
             display: flex;
             justify-content: center;
             gap: 3rem;
-            margin: 2rem 0;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--surface-accent);
+            border-radius: 20px;
+            border: 1px solid var(--border);
         }
 
         .stat {
@@ -209,125 +413,231 @@
         }
 
         .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #4a6fa5;
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
         }
 
         .question-container {
-            background: #f8f9ff;
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
             text-align: left;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
         }
 
         .patient-info {
-            background: rgba(107, 142, 181, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            background: var(--surface-elevated);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .patient-info h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .vital-signs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .vital-sign {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
+            background: var(--surface-elevated);
+            padding: 1.5rem;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 16px var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .vital-sign:hover {
+            transform: translateY(-2px);
         }
 
         .vital-label {
-            font-weight: bold;
-            color: #4a6fa5;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .vital-value {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
         }
 
         .answer-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
         .answer-btn {
-            padding: 1.5rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background: white;
+            padding: 2rem;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: var(--surface-elevated);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: center;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 16px var(--shadow);
         }
 
         .answer-btn:hover {
-            border-color: #4a6fa5;
-            background: #f8f9ff;
+            border-color: var(--secondary);
+            background: var(--surface);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--shadow-lg);
         }
 
         .answer-btn.correct {
-            background: #d4edda;
-            border-color: #28a745;
-            color: #155724;
+            background: var(--gradient-success);
+            border-color: var(--secondary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(56, 161, 105, 0.3);
         }
 
         .answer-btn.incorrect {
-            background: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
+            background: var(--gradient-secondary);
+            border-color: #E53E3E;
+            color: white;
+            box-shadow: 0 8px 32px rgba(229, 62, 62, 0.3);
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
         }
 
         .explanation {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
+            background: var(--gradient-warm);
+            background-size: 100% 100%;
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
             display: none;
+            box-shadow: 0 8px 32px rgba(250, 112, 154, 0.2);
         }
 
         .explanation.show {
             display: block;
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         .next-question {
-            background: linear-gradient(135deg, #4a6fa5 0%, #6b8eb5 100%);
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
             display: none;
-            margin: 2rem auto;
+            margin: 3rem auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .next-question:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(102, 126, 234, 0.4);
         }
 
         .next-question.show {
             display: block;
         }
 
+        .achievement-toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--gradient-success);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px var(--shadow-lg);
+            display: none;
+            z-index: 1000;
+            font-weight: 600;
+            max-width: 350px;
+        }
+
+        .achievement-toast.show {
+            display: block;
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(100%); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
         @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 2.4rem;
+            }
+
             .games-grid {
                 grid-template-columns: 1fr;
             }
@@ -343,14 +653,34 @@
             
             .game-stats {
                 gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .progress-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .achievement-toast {
+                top: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-overview {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="logo">🏥 ReadyNurse</div>
-        <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+        <div class="header-content">
+            <div class="logo">ReadyNurse</div>
+            <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+        </div>
     </header>
 
     <main class="main-content">
@@ -358,14 +688,43 @@
         <div id="home-screen">
             <section class="welcome-section">
                 <h1>Welcome to ReadyNurse</h1>
-                <p>Master nursing skills through interactive games designed for RN students and professionals. Challenge yourself, track your progress, and have fun while learning!</p>
+                <p>Master nursing skills through interactive games designed for RNs, students, and professionals. Challenge yourself, track your progress, and have fun while learning! (By a bored nursing student)</p>
             </section>
+
+            <!-- Progress Overview -->
+            <div class="progress-overview" id="progress-overview">
+                <div class="progress-card">
+                    <div class="progress-icon">📈</div>
+                    <div class="progress-value" id="total-score">0</div>
+                    <div class="progress-label">Total Score</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🎯</div>
+                    <div class="progress-value" id="total-games">0</div>
+                    <div class="progress-label">Games Played</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🔥</div>
+                    <div class="progress-value" id="best-streak">0</div>
+                    <div class="progress-label">Best Streak</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🏆</div>
+                    <div class="progress-value" id="achievements-count">0</div>
+                    <div class="progress-label">Achievements</div>
+                </div>
+            </div>
 
             <div class="games-grid">
                 <div class="game-card" onclick="startVitalsGame()">
                     <div class="game-icon">🩺</div>
                     <h3 class="game-title">Vital Signs Detective</h3>
                     <p class="game-description">Analyze patient vital signs and identify normal vs abnormal readings. Test your clinical assessment skills!</p>
+                    <div class="game-progress">
+                        <span>Beginner: <span id="beginner-progress">0/4</span></span>
+                        <span>Intermediate: <span id="intermediate-progress">0/3</span></span>
+                        <span>Expert: <span id="expert-progress">0/2</span></span>
+                    </div>
                     <button class="play-button">Play Now</button>
                 </div>
 
@@ -373,6 +732,9 @@
                     <div class="game-icon">💊</div>
                     <h3 class="game-title">Medication Math Challenge</h3>
                     <p class="game-description">Master dosage calculations and medication administration. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
                     <button class="play-button">Coming Soon</button>
                 </div>
 
@@ -380,6 +742,9 @@
                     <div class="game-icon">🫀</div>
                     <h3 class="game-title">Anatomy Quick Match</h3>
                     <p class="game-description">Match anatomical terms with their definitions and locations. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
                     <button class="play-button">Coming Soon</button>
                 </div>
 
@@ -387,6 +752,9 @@
                     <div class="game-icon">🚑</div>
                     <h3 class="game-title">Emergency Triage</h3>
                     <p class="game-description">Practice patient prioritization in emergency situations. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
                     <button class="play-button">Coming Soon</button>
                 </div>
             </div>
@@ -401,13 +769,13 @@
                 <p>Select the difficulty that matches your experience level</p>
                 <div class="difficulty-buttons">
                     <button class="difficulty-btn beginner" onclick="selectDifficulty('beginner')">
-                        🌱 Beginner<br><small>Basic vital signs</small>
+                        🌱 Beginner<br><small>Basic vital signs (<span id="beginner-completion">0/4</span> completed)</small>
                     </button>
                     <button class="difficulty-btn intermediate" onclick="selectDifficulty('intermediate')">
-                        🎯 Intermediate<br><small>Clinical scenarios</small>
+                        🎯 Intermediate<br><small>Clinical scenarios (<span id="intermediate-completion">0/3</span> completed)</small>
                     </button>
                     <button class="difficulty-btn expert" onclick="selectDifficulty('expert')">
-                        🔥 Expert<br><small>Complex cases</small>
+                        🔥 Expert<br><small>Complex cases (<span id="expert-completion">0/2</span> completed)</small>
                     </button>
                 </div>
             </div>
@@ -438,7 +806,7 @@
                         <!-- Vital signs will be loaded here -->
                     </div>
 
-                    <h4 style="margin-bottom: 1rem; text-align: center;">What is your assessment?</h4>
+                    <h4 style="margin-bottom: 2rem; text-align: center; font-size: 1.3rem; font-weight: 600;">What is your assessment?</h4>
                     <div class="answer-buttons">
                         <button class="answer-btn" onclick="selectAnswer('normal')">
                             ✅ Normal Vital Signs<br>
@@ -457,271 +825,44 @@
                 </div>
             </div>
         </div>
+
+        <!-- Achievement Toast -->
+        <div id="achievement-toast" class="achievement-toast">
+            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏆</div>
+            <div id="achievement-text">Achievement Unlocked!</div>
+        </div>
     </main>
 
     <script>
-        // Simple game state - no complex objects
-        let score = 0;
-        let streak = 0;
-        let currentQuestion = 0;
-        let selectedDifficulty = '';
-        let currentCorrectAnswer = '';
-
-        // Questions data
-        const questions = {
-            beginner: [
-                {
-                    patient: "Adult patient, Age 25, Resting",
-                    vitals: {
-                        "Heart Rate": "75 bpm",
-                        "Blood Pressure": "120/80 mmHg",
-                        "Temperature": "98.6°F (37°C)",
-                        "Respiratory Rate": "16/min"
-                    },
-                    correct: "normal",
-                    explanation: "All vital signs are within normal ranges for a healthy adult."
-                },
-                {
-                    patient: "Adult patient, Age 30, Post-exercise",
-                    vitals: {
-                        "Heart Rate": "160 bpm",
-                        "Blood Pressure": "140/85 mmHg",
-                        "Temperature": "99.2°F (37.3°C)",
-                        "Respiratory Rate": "28/min"
-                    },
-                    correct: "abnormal",
-                    explanation: "While some elevation is expected post-exercise, these readings are significantly elevated and concerning."
-                },
-                {
-                    patient: "Adult patient, Age 45, At rest",
-                    vitals: {
-                        "Heart Rate": "55 bpm",
-                        "Blood Pressure": "110/70 mmHg",
-                        "Temperature": "98.4°F (36.9°C)",
-                        "Respiratory Rate": "14/min"
-                    },
-                    correct: "normal",
-                    explanation: "Heart rate is on the lower end but can be normal for athletic individuals. Other vitals are normal."
-                },
-                {
-                    patient: "Child, Age 6, routine check-up",
-                    vitals: {
-                        "Heart Rate": "95 bpm",
-                        "Blood Pressure": "90/60 mmHg",
-                        "Temperature": "98.8°F (37.1°C)",
-                        "Respiratory Rate": "20/min"
-                    },
-                    correct: "normal",
-                    explanation: "These vital signs are normal for a child this age. Children typically have higher heart and respiratory rates."
-                }
-            ],
-            intermediate: [
-                {
-                    patient: "Elderly patient, Age 78, with fever and confusion",
-                    vitals: {
-                        "Heart Rate": "110 bpm",
-                        "Blood Pressure": "90/60 mmHg",
-                        "Temperature": "102.4°F (39.1°C)",
-                        "Respiratory Rate": "24/min",
-                        "O2 Saturation": "91%"
-                    },
-                    correct: "abnormal",
-                    explanation: "Multiple concerning findings: hypotension, tachycardia, fever, tachypnea, and low oxygen saturation suggest sepsis or serious infection."
-                },
-                {
-                    patient: "Pregnant patient, 32 weeks gestation, routine check",
-                    vitals: {
-                        "Heart Rate": "88 bpm",
-                        "Blood Pressure": "125/78 mmHg",
-                        "Temperature": "98.8°F (37.1°C)",
-                        "Respiratory Rate": "18/min"
-                    },
-                    correct: "normal",
-                    explanation: "These vital signs are within normal ranges for pregnancy. Slight increases in heart rate and respiratory rate are expected."
-                },
-                {
-                    patient: "Diabetic patient, presenting with weakness",
-                    vitals: {
-                        "Heart Rate": "105 bpm",
-                        "Blood Pressure": "85/50 mmHg",
-                        "Temperature": "97.2°F (36.2°C)",
-                        "Respiratory Rate": "22/min",
-                        "Blood Sugar": "45 mg/dL"
-                    },
-                    correct: "abnormal",
-                    explanation: "Hypotension, tachycardia, and severe hypoglycemia (blood sugar 45) require immediate intervention."
-                }
-            ],
-            expert: [
-                {
-                    patient: "ICU patient, post-cardiac surgery, on multiple drips",
-                    vitals: {
-                        "Heart Rate": "95 bpm",
-                        "Blood Pressure": "105/65 mmHg (MAP 78)",
-                        "Temperature": "97.8°F (36.6°C)",
-                        "Respiratory Rate": "12/min (ventilated)",
-                        "CVP": "8 mmHg",
-                        "Cardiac Output": "4.2 L/min"
-                    },
-                    correct: "normal",
-                    explanation: "Post-surgical vitals are acceptable. MAP >65, adequate cardiac output, and normal CVP indicate stable hemodynamics."
-                },
-                {
-                    patient: "Trauma patient, suspected internal bleeding",
-                    vitals: {
-                        "Heart Rate": "125 bpm",
-                        "Blood Pressure": "88/45 mmHg",
-                        "Temperature": "96.2°F (35.7°C)",
-                        "Respiratory Rate": "28/min",
-                        "Lactate": "4.2 mmol/L"
-                    },
-                    correct: "abnormal",
-                    explanation: "Signs of shock: tachycardia, hypotension, hypothermia, tachypnea, and elevated lactate indicate hemorrhagic shock."
-                }
-            ]
+        // Enhanced progress tracking system
+        let gameState = {
+            score: 0,
+            streak: 0,
+            currentQuestion: 0,
+            selectedDifficulty: '',
+            currentCorrectAnswer: ''
         };
 
-        // Simple functions
-        function startVitalsGame() {
-            console.log("Starting Vital Signs Detective game!");
-            document.getElementById('home-screen').style.display = 'none';
-            document.getElementById('game-interface').style.display = 'block';
-            
-            // Reset game
-            score = 0;
-            streak = 0;
-            currentQuestion = 0;
-            updateStats();
-        }
+        // Progress tracking in localStorage
+        const ProgressTracker = {
+            get data() {
+                const saved = localStorage.getItem('readynurse-progress');
+                return saved ? JSON.parse(saved) : {
+                    totalScore: 0,
+                    totalGames: 0,
+                    bestStreak: 0,
+                    achievements: [],
+                    completedQuestions: {
+                        beginner: [],
+                        intermediate: [],
+                        expert: []
+                    },
+                    difficultyStats: {
+                        beginner: { played: 0, correct: 0, streak: 0 },
+                        intermediate: { played: 0, correct: 0, streak: 0 },
+                        expert: { played: 0, correct: 0, streak: 0 }
+                    }
+                };
+            },
 
-        function selectDifficulty(difficulty) {
-            console.log("Selected difficulty:", difficulty);
-            selectedDifficulty = difficulty;
-            
-            // Update button styles
-            document.querySelectorAll('.difficulty-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            // Find and select the clicked button
-            const buttons = document.querySelectorAll('.difficulty-btn');
-            for (let btn of buttons) {
-                if (btn.textContent.toLowerCase().includes(difficulty)) {
-                    btn.classList.add('selected');
-                }
-            }
-            
-            // Start game after delay
-            setTimeout(function() {
-                document.getElementById('difficulty-selection').style.display = 'none';
-                document.getElementById('game-content').style.display = 'block';
-                loadQuestion();
-            }, 1000);
-        }
-
-        function loadQuestion() {
-            console.log("Loading question", currentQuestion + 1);
-            
-            const questionSet = questions[selectedDifficulty];
-            const question = questionSet[currentQuestion % questionSet.length];
-            currentCorrectAnswer = question.correct;
-            
-            // Update patient info
-            document.getElementById('patient-description').textContent = question.patient;
-            
-            // Update vital signs
-            const vitalsContainer = document.getElementById('vital-signs');
-            vitalsContainer.innerHTML = '';
-            
-            for (const [label, value] of Object.entries(question.vitals)) {
-                const vitalDiv = document.createElement('div');
-                vitalDiv.className = 'vital-sign';
-                vitalDiv.innerHTML = `
-                    <div class="vital-label">${label}</div>
-                    <div class="vital-value">${value}</div>
-                `;
-                vitalsContainer.appendChild(vitalDiv);
-            }
-            
-            // Update question number
-            document.getElementById('question-num').textContent = currentQuestion + 1;
-            
-            // Reset answer buttons
-            const answerButtons = document.querySelectorAll('.answer-btn');
-            answerButtons.forEach(btn => {
-                btn.classList.remove('correct', 'incorrect');
-                btn.disabled = false;
-            });
-            
-            // Hide explanation and next button
-            document.getElementById('explanation').classList.remove('show');
-            document.getElementById('next-btn').classList.remove('show');
-        }
-
-        function selectAnswer(answer) {
-            console.log("Selected answer:", answer);
-            
-            const questionSet = questions[selectedDifficulty];
-            const question = questionSet[currentQuestion % questionSet.length];
-            const isCorrect = answer === question.correct;
-            
-            // Update score and streak
-            if (isCorrect) {
-                const points = selectedDifficulty === 'expert' ? 15 : selectedDifficulty === 'intermediate' ? 10 : 5;
-                score += points;
-                streak++;
-            } else {
-                streak = 0;
-            }
-            
-            updateStats();
-            
-            // Disable buttons and show results
-            const answerButtons = document.querySelectorAll('.answer-btn');
-            answerButtons.forEach(btn => {
-                btn.disabled = true;
-                if (btn.onclick.toString().includes(question.correct)) {
-                    btn.classList.add('correct');
-                } else {
-                    btn.classList.add('incorrect');
-                }
-            });
-            
-            // Show explanation
-            const explanationDiv = document.getElementById('explanation');
-            explanationDiv.innerHTML = `
-                <h4>${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</h4>
-                <p>${question.explanation}</p>
-            `;
-            explanationDiv.classList.add('show');
-            document.getElementById('next-btn').classList.add('show');
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            loadQuestion();
-        }
-
-        function updateStats() {
-            document.getElementById('score').textContent = score;
-            document.getElementById('streak').textContent = streak;
-        }
-
-        function backToHome() {
-            document.getElementById('home-screen').style.display = 'block';
-            document.getElementById('game-interface').style.display = 'none';
-            document.getElementById('difficulty-selection').style.display = 'block';
-            document.getElementById('game-content').style.display = 'none';
-            
-            // Clear selections
-            document.querySelectorAll('.difficulty-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-        }
-
-        // Test function - you can delete this later
-        console.log("ReadyNurse JavaScript loaded successfully!");
-        console.log("Click test - if you see this, JavaScript is working!");
-    </script>
-</body>
-</html>
+            save(data)
