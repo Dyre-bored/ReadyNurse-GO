@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadyNurse - RN Gaming Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd0 100%);
+            color: #4a4a4a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6b8eb5 0%, #4a6fa5 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🏥";
+            margin-right: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .welcome-section h1 {
+            color: #4a6fa5;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #6b8eb5;
+        }
+
+        .game-card.active {
+            border-color: #4a6fa5;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .game-title {
+            color: #4a6fa5;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .coming-soon .play-button {
+            background: #bbb;
+            cursor: not-allowed;
+        }
+
+        .coming-soon .play-button:hover {
+            transform: none;
+        }
+
+        /* Game Interface */
+        .game-interface {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .difficulty-selector {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .difficulty-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .difficulty-btn.beginner {
+            border-color: #81c784;
+            color: #4caf50;
+        }
+
+        .difficulty-btn.intermediate {
+            border-color: #ffb74d;
+            color: #ff9800;
+        }
+
+        .difficulty-btn.expert {
+            border-color: #e57373;
+            color: #f44336;
+        }
+
+        .difficulty-btn.selected {
+            transform: scale(1.1);
+        }
+
+        .difficulty-btn.beginner.selected {
+            background: #4caf50;
+            color: white;
+        }
+
+        .difficulty-btn.intermediate.selected {
+            background: #ff9800;
+            color: white;
+        }
+
+        .difficulty-btn.expert.selected {
+            background: #f44336;
+            color: white;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a6fa5;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .question-container {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #4a6fa5;
+        }
+
+        .patient-info {
+            background: rgba(107, 142, 181, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .vital-signs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .vital-sign {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .vital-label {
+            font-weight: bold;
+            color: #4a6fa5;
+            font-size: 0.9rem;
+        }
+
+        .vital-value {
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .answer-btn {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .answer-btn:hover {
+            border-color: #4a6fa5;
+            background: #f8f9ff;
+        }
+
+        .answer-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .answer-btn.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .explanation {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .next-question {
+            background: linear-gradient(135deg, #4a6fa5 0%, #6b8eb5 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            margin: 1rem auto;
+            transition: transform 0.2s ease;
+        }
+
+        .next-question:hover {
+            transform: scale(1.05);
+        }
+
+        .next-question.show {
+            display: block;
+        }
+
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .back-button:hover {
+            background: #545b62;
+        }
+
+        .achievements {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 300px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .achievements.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .achievement-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .difficulty-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .answer-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <div class="logo">ReadyNurse</div>
+                <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Home Screen -->
+        <div id="home-screen">
+            <section class="welcome-section">
+                <h1>Welcome to ReadyNurse</h1>
+                <p>Master nursing skills through interactive games designed for RN students and professionals. Challenge yourself, track your progress, and have fun while learning!</p>
+            </section>
+
+            <div class="games-grid">
+                <div class="game-card" onclick="startGame('vitals')">
+                    <div class="game-icon">🩺</div>
+                    <h3 class="game-title">Vital Signs Detective</h3>
+                    <p class="game-description">Analyze patient vital signs and identify normal vs abnormal readings. Test your clinical assessment skills!</p>
+                    <button class="play-button">Play Now</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">💊</div>
+                    <h3 class="game-title">Medication Math Challenge</h3>
+                    <p class="game-description">Master dosage calculations and medication administration. Coming soon!</p>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">🫀</div>
+                    <h3 class="game-title">Anatomy Quick Match</h3>
+                    <p class="game-description">Match anatomical terms with their definitions and locations. Coming soon!</p>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">🚑</div>
+                    <h3 class="game-title">Emergency Triage</h3>
+                    <p class="game-description">Practice patient prioritization in emergency situations. Coming soon!</p>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div id="game-interface" class="game-interface">
+            <button class="back-button" onclick="backToHome()">← Back to Games</button>
+            
+            <div id="difficulty-selection" class="difficulty-selector">
+                <h2>Choose Your Challenge Level</h2>
+                <p>Select the difficulty that matches your experience level</p>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn beginner" onclick="selectDifficulty('beginner')">
+                        🌱 Beginner<br><small>Basic vital signs</small>
+                    </button>
+                    <button class="difficulty-btn intermediate" onclick="selectDifficulty('intermediate')">
+                        🎯 Intermediate<br><small>Clinical scenarios</small>
+                    </button>
+                    <button class="difficulty-btn expert" onclick="selectDifficulty('expert')">
+                        🔥 Expert<br><small>Complex cases</small>
+                    </button>
+                </div>
+            </div>
+
+            <div id="game-content" style="display: none;">
+                <div class="game-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">Streak</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="question-num">1</div>
+                        <div class="stat-label">Question</div>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="patient-info">
+                        <h3>Patient Assessment</h3>
+                        <p id="patient-description"></p>
+                    </div>
+
+                    <div class="vital-signs" id="vital-signs"></div>
+
+                    <h4 style="margin-bottom: 1rem;">What is your assessment?</h4>
+                    <div class="answer-buttons" id="answer-buttons"></div>
+
+                    <div class="explanation" id="explanation"></div>
+                    <button class="next-question" id="next-btn" onclick="nextQuestion()">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Notification -->
+        <div id="achievements" class="achievements">
+            <h4>🏆 Achievement Unlocked!</h4>
+            <div id="achievement-list"></div>
+        </div>
+    </main>
+
+    <script>
+        let gameData = {
+            score: 0,
+            streak: 0,
+            currentQuestion: 0,
+            difficulty: '',
+            achievements: JSON.parse(localStorage.getItem('rn-achievements') || '[]'),
+            stats: JSON.parse(localStorage.getItem('rn-stats') || '{}')
+        };
+
+        const vitalSignsQuestions = {
+            beginner: [
+                {
+                    patient: "Adult patient, Age 25, Resting",
+                    vitals: {
+                        "Heart Rate": "75 bpm",
+                        "Blood Pressure": "120/80 mmHg",
+                        "Temperature": "98.6°F (37°C)",
+                        "Respiratory Rate": "16/min"
+                    },
+                    correct: "normal",
+                    explanation: "All vital signs are within normal ranges for a healthy adult."
+                },
+                {
+                    patient: "Adult patient, Age 30, Post-exercise",
+                    vitals: {
+                        "Heart Rate": "160 bpm",
+                        "Blood Pressure": "140/85 mmHg",
+                        "Temperature": "99.2°F (37.3°C)",
+                        "Respiratory Rate": "28/min"
+                    },
+                    correct: "abnormal",
+                    explanation: "While some elevation is expected post-exercise, these readings are significantly elevated and concerning."
+                },
+                {
+                    patient: "Adult patient, Age 45, At rest",
+                    vitals: {
+                        "Heart Rate": "55 bpm",
+                        "Blood Pressure": "110/70 mmHg",
+                        "Temperature": "98.4°F (36.9°C)",
+                        "Respiratory Rate": "14/min"
+                    },
+                    correct: "normal",
+                    explanation: "Heart rate is on the lower end but can be normal for athletic individuals. Other vitals are normal."
+                }
+            ],
+            intermediate: [
+                {
+                    patient: "Elderly patient, Age 78, with fever and confusion",
+                    vitals: {
+                        "Heart Rate": "110 bpm",
+                        "Blood Pressure": "90/60 mmHg",
+                        "Temperature": "102.4°F (39.1°C)",
+                        "Respiratory Rate": "24/min",
+                        "O2 Saturation": "91%"
+                    },
+                    correct: "abnormal",
+                    explanation: "Multiple concerning findings: hypotension, tachycardia, fever, tachypnea, and low oxygen saturation suggest sepsis or serious infection."
+                },
+                {
+                    patient: "Pregnant patient, 32 weeks gestation, routine check",
+                    vitals: {
+                        "Heart Rate": "88 bpm",
+                        "Blood Pressure": "125/78 mmHg",
+                        "Temperature": "98.8°F (37.1°C)",
+                        "Respiratory Rate": "18/min"
+                    },
+                    correct: "normal",
+                    explanation: "These vital signs are within normal ranges for pregnancy. Slight increases in heart rate and respiratory rate are expected."
+                },
+                {
+                    patient: "Child, Age 8, presenting with difficulty breathing",
+                    vitals: {
+                        "Heart Rate": "130 bpm",
+                        "Blood Pressure": "85/55 mmHg",
+                        "Temperature": "100.8°F (38.2°C)",
+                        "Respiratory Rate": "35/min"
+                    },
+                    correct: "abnormal",
+                    explanation: "Tachycardia and tachypnea are concerning in a child with breathing difficulties. Temperature indicates fever."
+                }
+            ],
+            expert: [
+                {
+                    patient: "ICU patient, post-cardiac surgery, on multiple drips",
+                
