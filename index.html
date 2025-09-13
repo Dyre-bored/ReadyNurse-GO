@@ -44,59 +44,6 @@
             font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
         }
 
-        .header {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,100 1000,100 1000,20 0,80"/></svg>');
-            background-size: cover;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo::before {
-            content:"";
-            margin-right: 0;
-            filter: none;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-        }
-
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
