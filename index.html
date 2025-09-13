@@ -677,19 +677,58 @@
 </head>
 <body>
    <header class="header">
-    <div class="header-content">
-        <div style="display:flex; align-items:center; gap:0.5rem;">
-            <!-- Line-art book + stethoscope logo -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 64 64" stroke="currentColor" fill="none" stroke-width="2">
-                <!-- Book -->
-                <rect x="8" y="12" width="32" height="40" rx="2" ry="2"/>
-                <line x1="24" y1="12" x2="24" y2="52"/>
-                <!-- Stethoscope -->
-                <circle cx="50" cy="20" r="6"/>
-                <line x1="50" y1="26" x2="42" y2="36"/>
-                <line x1="42" y1="36" x2="42" y2="46"/>
-                <line x1="42" y1="46" x2="38" y2="46"/>
-            </svg>
+  <div class="header-content">
+    <!-- Logo and site name -->
+    <div class="logo-container">
+      <img src="logo.svg" alt="ReadyNurse Logo" class="logo-img">
+      <div class="logo-text">ReadyNurse</div>
+    </div>
+    <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+  </div>
+</header>
+
+<style>
+  /* Header styles */
+  .header {
+    background-color: #ffffff; /* solid background, no gradient */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a1a; /* dark solid color for text */
+  }
+
+  .tagline {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    color: #555555;
+    margin-top: 0.25rem;
+  }
+</style>
 
             <!-- Logo text -->
             <div class="logo" style="color:#1e3a8a; font-weight:bold; font-size:1.5rem;">
