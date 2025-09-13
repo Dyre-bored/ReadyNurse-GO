@@ -25,7 +25,7 @@
     left: 0;
     width: 200%;
     height: 200%;
-    background: linear-gradient(270deg, #FFD700, #1E90FF, #FFD700, #1E90FF);
+    background: linear-gradient(270deg, #FF6347, #8A2BE2, #FF6347, #8A2BE2);
     background-size: 400% 400%;
     animation: gradientMove 15s ease infinite;
     z-index: 0;
