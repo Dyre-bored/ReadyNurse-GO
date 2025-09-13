@@ -676,9 +676,8 @@
 </style>
 </head>
 <body>
-   <header class="header">
+ <header class="header">
   <div class="header-content">
-    <!-- Logo and site name -->
     <div class="logo-container">
       <img src="logo.svg" alt="ReadyNurse Logo" class="logo-img">
       <div class="logo-text">ReadyNurse</div>
@@ -690,7 +689,7 @@
 <style>
   /* Header styles */
   .header {
-    background-color: #ffffff; /* header background */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 1rem 2rem;
     display: flex;
     justify-content: center;
@@ -720,19 +719,20 @@
     font-family: 'Arial', sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
-    background: linear-gradient(90deg, #FF6B6B, #FFD93D); /* example gradient */
-    -webkit-background-c
+    background: linear-gradient(90deg, #FF6B6B, #FFD93D); /* gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 
+  .tagline {
+    font-size: 1rem;
+    color: #fff;
+    margin-top: 0.3rem;
+    font-weight: 500;
+  }
 </style>
-            <!-- Logo text -->
-            <div class="logo" style="color:#1e3a8a; font-weight:bold; font-size:1.5rem;">
-                ReadyNurse
-            </div>
-        </div>
-
-        <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
-    </div>
-</header>
 
     <main class="main-content">
         <!-- Home Screen -->
