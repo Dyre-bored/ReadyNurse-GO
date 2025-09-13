@@ -634,51 +634,60 @@
 </header>
 
 <style>
-  /* Header styles */
   .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem 2rem;
+    position: relative;
+    height: 250px; /* adjust as needed */
+    overflow: hidden;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
+    color: #fff; /* text color */
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
 
-  .header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.header-content {
+    position: relative;
+    z-index: 1; /* content stays on top */
+}
 
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(270deg, #FFD700, #1E90FF, #FFD700, #1E90FF);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    z-index: 0;
+}
 
-  .logo-img {
-    width: 48px;
-    height: 48px;
-  }
+.header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="50" cy="50" r="50" fill="%23ffffff" fill-opacity="0.05"/></svg>');
+    background-repeat: repeat;
+    animation: shapesMove 30s linear infinite;
+    z-index: 0;
+}
 
-  /* Gradient text for ReadyNurse */
-  .logo-text {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: linear-gradient(90deg, #FF6B6B, #FFD93D); /* gradient text */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-  .tagline {
-    font-size: 1rem;
-    color: #fff;
-    margin-top: 0.3rem;
-    font-weight: 500;
-  }
+@keyframes shapesMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 200px; }
+}
+
 </style>
 
     <main class="main-content">
