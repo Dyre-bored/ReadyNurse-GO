@@ -676,25 +676,30 @@
 </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content" style="display:flex; align-items:center; justify-content:space-between; padding:1rem;">
-            <!-- Logo and Site Name -->
-            <div style="display:flex; align-items:center; gap:0.5rem;">
-                <img src="logo.svg" alt="ReadyNurse Logo" style="height:48px; width:48px;">
-                <div class="logo" style="font-size:1.8rem; font-weight:bold; 
-                    background: linear-gradient(90deg, #6a11cb, #2575fc); 
-                    -webkit-background-clip: text; 
-                    -webkit-text-fill-color: transparent;">
-                    ReadyNurse
-                </div>
-            </div>
+   <header class="header">
+    <div class="header-content">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+            <!-- Line-art book + stethoscope logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 64 64" stroke="currentColor" fill="none" stroke-width="2">
+                <!-- Book -->
+                <rect x="8" y="12" width="32" height="40" rx="2" ry="2"/>
+                <line x1="24" y1="12" x2="24" y2="52"/>
+                <!-- Stethoscope -->
+                <circle cx="50" cy="20" r="6"/>
+                <line x1="50" y1="26" x2="42" y2="36"/>
+                <line x1="42" y1="36" x2="42" y2="46"/>
+                <line x1="42" y1="46" x2="38" y2="46"/>
+            </svg>
 
-            <!-- Tagline -->
-            <div class="tagline" style="font-size:1rem; color:#555;">
-                RN Gaming Hub - Learn, Play, Excel
+            <!-- Logo text -->
+            <div class="logo" style="color:#1e3a8a; font-weight:bold; font-size:1.5rem;">
+                ReadyNurse
             </div>
         </div>
-    </header>
+
+        <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
+    </div>
+</header>
 
     <main class="main-content">
         <!-- Home Screen -->
