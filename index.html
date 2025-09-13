@@ -681,4 +681,204 @@
         <div class="header-content">
             <div class="logo">ReadyNurse</div>
             <div class="tagline">RN Gaming Hub - Learn, Play, Excel</div>
-     
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Home Screen -->
+        <div id="home-screen">
+            <section class="welcome-section">
+                <h1>Welcome to ReadyNurse</h1>
+                <p>Master nursing skills through interactive games designed for RNs, students, and professionals. Challenge yourself, track your progress, and have fun while learning! (By a bored nursing student)</p>
+            </section>
+
+            <!-- Progress Overview -->
+            <div class="progress-overview" id="progress-overview">
+                <div class="progress-card">
+                    <div class="progress-icon">📈</div>
+                    <div class="progress-value" id="total-score">0</div>
+                    <div class="progress-label">Total Score</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🎯</div>
+                    <div class="progress-value" id="total-games">0</div>
+                    <div class="progress-label">Games Played</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🔥</div>
+                    <div class="progress-value" id="best-streak">0</div>
+                    <div class="progress-label">Best Streak</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🏆</div>
+                    <div class="progress-value" id="achievements-count">0</div>
+                    <div class="progress-label">Achievements</div>
+                </div>
+            </div>
+
+            <div class="games-grid">
+                <div class="game-card" onclick="startVitalsGame()">
+                    <div class="game-icon">🩺</div>
+                    <h3 class="game-title">Vital Signs Detective</h3>
+                    <p class="game-description">Analyze patient vital signs and identify normal vs abnormal readings. Test your clinical assessment skills!</p>
+                    <div class="game-progress">
+                        <span>Beginner: <span id="beginner-progress">0/4</span></span>
+                        <span>Intermediate: <span id="intermediate-progress">0/3</span></span>
+                        <span>Expert: <span id="expert-progress">0/2</span></span>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">💊</div>
+                    <h3 class="game-title">Medication Math Challenge</h3>
+                    <p class="game-description">Master dosage calculations and medication administration. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">🫀</div>
+                    <h3 class="game-title">Anatomy Quick Match</h3>
+                    <p class="game-description">Match anatomical terms with their definitions and locations. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+
+                <div class="game-card coming-soon">
+                    <div class="game-icon">🚑</div>
+                    <h3 class="game-title">Emergency Triage</h3>
+                    <p class="game-description">Practice patient prioritization in emergency situations. Coming soon!</p>
+                    <div class="game-progress">
+                        <span>Progress: 0%</span>
+                    </div>
+                    <button class="play-button">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div id="game-interface" class="game-interface">
+            <button class="back-button" onclick="backToHome()">← Back to Games</button>
+            
+            <div id="difficulty-selection">
+                <h2>Choose Your Challenge Level</h2>
+                <p>Select the difficulty that matches your experience level</p>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn beginner" onclick="selectDifficulty('beginner')">
+                        🌱 Beginner<br><small>Basic vital signs (<span id="beginner-completion">0/4</span> completed)</small>
+                    </button>
+                    <button class="difficulty-btn intermediate" onclick="selectDifficulty('intermediate')">
+                        🎯 Intermediate<br><small>Clinical scenarios (<span id="intermediate-completion">0/3</span> completed)</small>
+                    </button>
+                    <button class="difficulty-btn expert" onclick="selectDifficulty('expert')">
+                        🔥 Expert<br><small>Complex cases (<span id="expert-completion">0/2</span> completed)</small>
+                    </button>
+                </div>
+            </div>
+
+            <div id="game-content" style="display: none;">
+                <div class="game-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">Streak</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="question-num">1</div>
+                        <div class="stat-label">Question</div>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="patient-info">
+                        <h3>Patient Assessment</h3>
+                        <p id="patient-description">Loading patient information...</p>
+                    </div>
+
+                    <div class="vital-signs" id="vital-signs">
+                        <!-- Vital signs will be loaded here -->
+                    </div>
+
+                    <h4 style="margin-bottom: 2rem; text-align: center; font-size: 1.3rem; font-weight: 600;">What is your assessment?</h4>
+                    <div class="answer-buttons">
+                        <button class="answer-btn" onclick="selectAnswer('normal')">
+                            ✅ Normal Vital Signs<br>
+                            <small>Within expected ranges</small>
+                        </button>
+                        <button class="answer-btn" onclick="selectAnswer('abnormal')">
+                            ⚠️ Abnormal Vital Signs<br>
+                            <small>Requires attention</small>
+                        </button>
+                    </div>
+
+                    <div class="explanation" id="explanation">
+                        <!-- Explanation will appear here -->
+                    </div>
+                    <button class="next-question" id="next-btn" onclick="nextQuestion()">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Toast -->
+        <div id="achievement-toast" class="achievement-toast">
+            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏆</div>
+            <div id="achievement-text">Achievement Unlocked!</div>
+        </div>
+    </main>
+
+    <script>
+        // --- GAME DATA AND QUESTIONS (START HERE FOR ACTUAL GAME CONTENT) ---
+        const vitalSignQuestions = {
+            beginner: [
+                {
+                    id: 1,
+                    description: "A 22-year-old healthy college student comes for a routine check-up.",
+                    vitals: {
+                        temp: "37.0°C (98.6°F)",
+                        hr: "72 bpm",
+                        bp: "120/78 mmHg",
+                        rr: "16 breaths/min",
+                        spo2: "99%"
+                    },
+                    correctAnswer: "normal",
+                    explanation: "All vital signs are within normal limits for a healthy young adult."
+                },
+                {
+                    id: 2,
+                    description: "A 68-year-old patient admitted with dehydration. Assessing current vitals.",
+                    vitals: {
+                        temp: "37.5°C (99.5°F)",
+                        hr: "105 bpm",
+                        bp: "100/60 mmHg",
+                        rr: "22 breaths/min",
+                        spo2: "95%"
+                    },
+                    correctAnswer: "abnormal",
+                    explanation: "Heart rate (tachycardia), blood pressure (hypotension), and respiratory rate (tachypnea) are abnormal, consistent with dehydration. SpO2 is slightly low."
+                },
+                {
+                    id: 3,
+                    description: "A 35-year-old patient 2 hours post-appendectomy. Pain is controlled.",
+                    vitals: {
+                        temp: "37.2°C (99.0°F)",
+                        hr: "88 bpm",
+                        bp: "118/76 mmHg",
+                        rr: "18 breaths/min",
+                        spo2: "98%"
+                    },
+                    correctAnswer: "normal",
+                    explanation: "Vital signs are stable and within expected post-operative ranges given controlled pain. Mild elevation in HR is common post-op."
+                },
+                {
+                    id: 4,
+                    description: "A 7-year-old child with a sudden onset of fever and malaise.",
+                    vitals: {
+                        temp: "39.1°C (102.4°
